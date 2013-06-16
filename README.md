@@ -1,6 +1,6 @@
 # Tape.vim: Temporary Persistant Undo
 
-Tape is short for **T**empor**a**ry **Pe**rsistent Undo. It's meant to give Vim
+Tape is short for TemporAry  PErsistent undo. It's meant to give Vim
 the benefit of remembering your undo history for a period of time after you
 close Vim while keeping those ugly .un~ out of the way and cleaning them out
 automatically.
