@@ -13,16 +13,16 @@ function! s:enable_tape()
 		set undodir=~/.vim/undodir//
 
 	elseif has('win32') || has('win64')
-		let undopath = '%AppData%\\vimundodir\\'
+		let undopath = '%AppData%\\vim\\undodir\\'
 
-		if isdirectory('$appdata\\vimundodir\\') == 'FALSE'
+		if isdirectory('$appdata/vim/undodir/') == 'FALSE'
 			call system('mkdir ' . undopath)
 		endif
 
 		"Delete files older than 5 days"
 		call system('forfiles -p "' . undopath . '" -s -m *.* -d 5 -c "cmd /c del @path"')
 
-		set undodir=$appdata/vimundodir//
+		set undodir=$appdata/vim/undodir//
 	endif
 
 	"Enable persistent undo"
