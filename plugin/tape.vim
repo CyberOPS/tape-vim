@@ -1,9 +1,14 @@
 " Tape.vim - Temporary Persistent Undo
 " Maintainer: Kevin C. <skate_ops@yahoo.com>
 " License:  Distributed under the same terms as Vim itself
-" Version: 1.0
+" Version: 1.1
 
-function! Tapedown(...)
+if exists("g:loaded_tape")
+	finish
+endif
+let g:loaded_pathogen = 1
+
+function! Tape(...)
 	"If no value (or zero) is given, set days to default"
 	if a:0 == 0
 		let days = '5'
@@ -49,4 +54,10 @@ function! Tapedown(...)
 	set undofile
 endfunction
 
-command! -nargs=? Tape call Tapedown(<f-args>)
+if exists("g:tape_expire")
+	call Tape(g:tape_expire)
+else
+	call Tape()
+endif
+
+command! -nargs=? TPurge call Tapedown(<f-args>)

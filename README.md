@@ -22,8 +22,9 @@ If you would like to change the undodir, you will have to modify the script in
 
 This script should work with unixy systems and MS Windows.
 
-In your vimrc insert `Tape` or `Tape N` with N being the number of days an undo
-will have after its last modification date.
+(Optional) Add `g:tape_expire N` to your .vimrc, with N being the number of
+days an undo will have after its last modification date before it's deleted.
+If you do not add this to your .vimrc, it will default to 5 days.
 
 ### Normal Way
 
