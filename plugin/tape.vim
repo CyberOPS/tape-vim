@@ -1,7 +1,7 @@
 " Tape.vim - Temporary Persistent Undo
 " Maintainer: Kevin C. <skate_ops@yahoo.com>
 " License:  Distributed under the same terms as Vim itself
-" Version: 1.1
+" Version: 0.9
 
 if exists("g:loaded_tape")
 	finish
