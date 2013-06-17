@@ -8,9 +8,9 @@ Basically, Tape enables Vim's built in persistent undo feature while hiding the
 hidden undo files in `~/.vim/undodir` (`%AppData%\vim\undodir` on MS-Windows),
 minimizing litter in your file system. The undo files are given unique names
 based on their path allowing vim to identify two same named files, in different
-directories, as separate. These files will expire after a certain amount of
-days (defaults to 5) after last use giving you no reason to manually delete
-them along with their respective files.
+directories, as separate. These files will expire after 5 (adjustable) days
+from last use giving you no reason to manually delete them when you delete
+their respective files.
 
 ## Install
 This script should work with unixy systems and MS Windows.
