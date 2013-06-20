@@ -3,15 +3,21 @@
 " License:  Distributed under the same terms as Vim itself
 " Version: 0.9
 
-if exists("g:loaded_tape")
+if exists('g:loaded_tape')
 	finish
 endif
 let g:loaded_pathogen = 1
 
+
+if !exists('g:tape_expire')
+	let g:tape_expire = 5
+endif
+
+
 function! Tape(...)
-	"If no value (or zero) is given, set days to default"
+	"If no value is given, set days to default"
 	if a:0 == 0
-		let days = '5'
+		let days = g:tape_expire
 	else
 		let days = a:1
 	endif
@@ -21,15 +27,19 @@ function! Tape(...)
 		let undopath = "~/.vim/undodir/"
 
 		"Ensure directory path exist"
-		if isdirectory(undopath) == 'FALSE'
-			call system('mkdir ' . undopath)
+		if !isdirectory(undopath)
+			call system('mkdir '.undopath)
 		endif
 
 		"Set undodir"
 		set undodir=~/.vim/undodir//
 
-		"Delete files older than 5 days"
-		call system('find ' . undopath . ' -type f -mtime +' . days . ' -exec rm {} \;')
+		"Remove old files"
+		if days == 0
+			call system('rm -f '.undopath.'*')
+		else
+			call system('find '.undopath.' -type f -mtime +'.days.' -exec rm {} \;')
+		endif
 
 	elseif has('win32') || has('win64')
 		"Define undopath for MS Windows"
@@ -43,21 +53,25 @@ function! Tape(...)
 		"Set undodir"
 		set undodir=$appdata/vim/undodir//
 
-		"Delete files older than 5 days"
+		"Remove old files"
+		if days <= 0
+			call system('del /q '.undopath.'*')
+		else
 			"Windows Vista and earlier"
-		call system('forfiles -p "' . undopath . '" -s -m *.* -d ' . days . ' -c "cmd /c del @path"')
+			call system('forfiles -p "'.undopath.'" -s -m *.* -d '.days.' -c "cmd /c del @path"')
 			"Windows 7 & later"
-		call system('forfiles -p "' . undopath . '" -s -m *.* /D -' . days . ' /C "cmd /c del @path"')
+			call system('forfiles -p "'.undopath.'" -s -m *.* /D -'.days.' /C "cmd /c del @path"')
+		endif
 	endif
 
 	"Enable persistent undo"
 	set undofile
 endfunction
 
-if exists("g:tape_expire")
-	call Tape(g:tape_expire)
-else
-	call Tape()
-endif
 
-command! -nargs=? TPurge call Tapedown(<f-args>)
+call Tape(g:tape_expire)
+
+
+"Set user command to manually clean history"
+command! -nargs=? TPclean call Tape(<f-args>)
+command! -nargs=? TPc call Tape(<f-args>)
