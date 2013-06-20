@@ -55,7 +55,7 @@ function! Tape(...)
 
 		"Remove old files"
 		if days <= 0
-			call system('del /q '.undopath.'*')
+			call system('del /q '.undopath)
 		else
 			"Windows Vista and earlier"
 			call system('forfiles -p "'.undopath.'" -s -m *.* -d '.days.' -c "cmd /c del @path"')
