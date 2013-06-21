@@ -1,7 +1,7 @@
 " Tape.vim - Temporary Persistent Undo
 " Maintainer: Kevin C. <skate_ops@yahoo.com>
 " License:  Distributed under the same terms as Vim itself
-" Version: 0.9
+" Version: 1.0
 
 if exists('g:loaded_tape')
 	finish
@@ -28,7 +28,7 @@ function! Tape(...)
 
 		"Ensure directory path exist"
 		if !isdirectory(undopath)
-			call system('mkdir '.undopath)
+			call system('mkdir -p '.undopath)
 		endif
 
 		"Set undodir"
@@ -47,7 +47,7 @@ function! Tape(...)
 
 		"Ensure directory path exist"
 		if isdirectory('$appdata/vim/undodir') == 'FALSE'
-			call system('mkdir ' . undopath)
+			call system('mkdir '.undopath)
 		endif
 
 		"Set undodir"
