@@ -9,9 +9,9 @@ hidden undo files in `~/.vim/undodir` (`%AppData%\vim\undodir` on MS-Windows),
 minimizing litter in the file system. The undo files are given unique names
 based on their path allowing vim to know the diffrence between two files with
 the same name but in different directories. All undo files will expire 5 days
-after last use leaving no reason to manually delete them all the time. By
-inserting in your vimrc `let g:tape_expire = N` with `N` as a number, the days
-a file will last after modification can be adjusted.
+after last modification leaving no reason to manually delete them all the time;
+This can be adjusted by inserting `let g:tape_expire = N` with `N` as the number
+of days you'd prefer the files to last.
 
 Tape.vim also allows manually clearing undo files older than a specified amount
 of days with `:TPclean` (or `:TPc`). To clear all undo files type `:TPclean 0`.
