@@ -1,7 +1,6 @@
 " Tape.vim - Temporary Persistent Undo
 " Maintainer: Kevin C. <skate_ops@yahoo.com>
 " License:  Distributed under the same terms as Vim itself
-" Version: 1.0
 
 if exists('g:loaded_tape')
 	finish
@@ -43,10 +42,10 @@ function! Tape(...)
 
 	elseif has('win32') || has('win64')
 		"Define undopath for MS Windows"
-		let undopath = '%AppData%\vim\undodir'
+		let undopath = $appdata . '\vim\undodir'
 
 		"Ensure directory path exist"
-		if isdirectory('$appdata/vim/undodir') == 'FALSE'
+		if isdirectory(undopath) == 'FALSE'
 			call system('mkdir '.undopath)
 		endif
 
