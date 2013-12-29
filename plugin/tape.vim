@@ -57,9 +57,9 @@ function! Tape(...)
 			call system('del /q '.undopath)
 		else
 			"Windows Vista and earlier"
-			call system('forfiles -p "'.undopath.'" -s -m *.* -d '.days.' -c "cmd /c del @path"')
+			call system('forfiles -p "'.undopath.'" -s -m *.* -d '.days.' -c "cmd /c del @path" 2>nul')
 			"Windows 7 & later"
-			call system('forfiles -p "'.undopath.'" -s -m *.* /D -'.days.' /C "cmd /c del @path"')
+			call system('forfiles -p "'.undopath.'" -s -m *.* /D -'.days.' /C "cmd /c del @path" 2>nul')
 		endif
 	endif
 
